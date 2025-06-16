@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  spring-kaikan-api:
+    image:  spring-kaikan-api
+    container_name: spring-api-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-network
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: kaikan
+      POSTGRES_USER: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - spring-network
+    volumes:
+      - postgres-volume:/var/lib/postgres
+networks:
+  spring-network:
+volumes:
+  postgres-volume:
