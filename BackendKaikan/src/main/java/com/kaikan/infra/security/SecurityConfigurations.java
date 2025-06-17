@@ -3,6 +3,7 @@ package com.kaikan.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
@@ -48,7 +49,8 @@ public class SecurityConfigurations {
                                         .requestMatchers(request -> request.getRequestURI().endsWith(".ico")).permitAll()
                                         .requestMatchers(request -> request.getRequestURI().endsWith(".jpg")).permitAll()
                                         .requestMatchers(request -> request.getRequestURI().endsWith(".js")).permitAll()
-                                        .requestMatchers("/hola/**").hasAuthority("ADMIN")
+                                        .requestMatchers(HttpMethod.GET, "/api/categoria").permitAll()
+                                        .requestMatchers(HttpMethod.GET, "/api/platos").permitAll()
                                         .requestMatchers("/api/**").authenticated()
                                         .anyRequest()
                                         .authenticated()
