@@ -1,5 +1,5 @@
 
-   export const url: string = 'http://192.168.1.2:8080/api';
+   export const url: string = 'http://localhost:8080/api';
 //export const url: string = 'https://backendkaikan.onrender.com/api'
 export const constants = {
     CURRENT_USERID:'userid',

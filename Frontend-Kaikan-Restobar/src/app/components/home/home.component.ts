@@ -4,14 +4,15 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from '../../shared/components/menu/menu.component';
 import { Categoria } from '../../core/models/categoria';
 import { CategoriaService } from '../../core/services/categoria.service';
+import { CarritoDetalleComponent } from '../../shared/carrito-detalle/carrito-detalle.component';
 
 
 @Component({
   selector: 'app-home',
-  imports: [NavegacionComponent, CommonModule, MenuComponent],
+  standalone: true,
+  imports: [NavegacionComponent, CommonModule, MenuComponent, CarritoDetalleComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
-
+  styleUrl: './home.component.css'
 
 })
 export class HomeComponent {

@@ -1,0 +1,39 @@
+<div class="position-fixed bottom-0 end-0 m-3 carrito-ios border rounded-4 shadow-lg" [class.minimizado]="minimizado">
+    <!-- Encabezado clickeable -->
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 bg-dark bg-opacity-50 text-white rounded-top-4"
+        (click)="toggle()" role="button">
+        <span>{{ minimizado ? '🛒 Ver Pedido' : '🛒 Mi Pedido' }}</span>
+        <span>
+            <i class="bi" [ngClass]="minimizado ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </span>
+    </div>
+
+    <!-- Contenido colapsable -->
+    <div class="collapse show carrito-body-ios text-white px-3 py-2 resumen-venta" [class.show]="!minimizado">
+        <div *ngIf="items.length === 0" class="text-muted text-center">
+            No hay platos aún
+        </div>
+
+        <ul *ngIf="items.length > 0" class="list-group list-group-flush mb-2">
+            <li *ngFor="let item of items"
+                class="list-group-item  bg-transparent border-0 py-1 px-0 d-flex justify-content-between align-items-center">
+                <div class="me-2 ">
+                    <div class="fw-semibold text-white">{{ item.nombre }}</div>
+                    <small class="text-white">{{ item.precio | currency }} x {{ item.cantidad }}</small>
+                </div>
+
+                <div class="d-flex align-items-center gap-1">
+                    <button class="btn btn-sm btn-outline-secondary" (click)="disminuirCantidad(item)">➖</button>
+                    <span>{{ item.cantidad }}</span>
+                    <button class="btn btn-sm btn-outline-secondary" (click)="aumentarCantidad(item)">➕</button>
+                    <button class="btn btn-sm btn-outline-danger ms-2" (click)="eliminar(item)">✖</button>
+                </div>
+            </li>
+        </ul>
+
+
+        <hr class="border-light border-opacity-25 my-2" />
+        <p class="mb-2 fw-semibold">Total: {{ total | currency }}</p>
+        <button class="btn btn-success btn-sm w-100 rounded-pill">Hacer pedido</button>
+    </div>
+</div>

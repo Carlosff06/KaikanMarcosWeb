@@ -2,6 +2,7 @@ import { Component,  Input, SimpleChanges } from '@angular/core';
 import { Plato } from '../../../core/models/plato';
 import { PlatoService } from '../../../core/services/plato.service';
 import { CommonModule } from '@angular/common';
+import { CarritoService } from '../../../core/services/carrito.service';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -16,11 +17,15 @@ export class MenuComponent {
   isProcessing=false;
   platoSeleccionado='';
   @Input() categoria: string = '';
-  constructor(private readonly platoService: PlatoService
-  ){
+  constructor(
+    private readonly platoService: PlatoService,
+    private readonly carritoService: CarritoService,
+  ){}
 
+  agregarAlCarrito(plato: Plato){
+    this.carritoService.agregar(plato);
+    console.log('Plato agregado al carrito:', plato);
   }
-
 
 
   ngOnChanges(changes: SimpleChanges) {

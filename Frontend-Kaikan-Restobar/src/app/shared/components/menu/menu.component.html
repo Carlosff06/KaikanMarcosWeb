@@ -17,7 +17,7 @@
           <p class="text">{{plato.descripcion}}</p>
 
            <div class="currency-container"> <p class="text">{{plato.precio | currency}}</p>
-          <button class="btn btn-danger">Agregar al Carrito</button>
+          <button class="btn btn-danger" (click)="agregarAlCarrito(plato)">Agregar al Carrito</button>
         </div>
         </div>
 
