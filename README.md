@@ -1,32 +1,49 @@
-KaikanMarcosWeb
-Descripción
-KaikanMarcosWeb es una aplicación backend desarrollada en Spring Boot para la gestión integral de un restaurante. Incluye funcionalidades para administrar clientes, productos (platos), y ventas con control de stock, autenticación y autorización basada en roles, y seguridad reforzada.
+# KaikanMarcosWeb
 
-Tecnologías utilizadas
-Java 17
+---
 
-Spring Boot 3.x
+## 📋 Descripción
 
-Spring Data JPA (Hibernate)
+**KaikanMarcosWeb** es una aplicación backend desarrollada con **Spring Boot** para la gestión integral de un restaurante.  
+Ofrece funcionalidades para administrar:
 
-Spring Security (BCrypt, UserDetailsService)
+- Clientes (usuarios)  
+- Productos (platos)  
+- Ventas con control de stock  
+- Autenticación y autorización basada en roles  
+- Seguridad reforzada con hashing de contraseñas y protección CSRF  
 
-Maven
+---
 
-PostgreSQL
+## 🚀 Tecnologías utilizadas
 
-Jakarta Bean Validation
+- **Java 17**  
+- **Spring Boot 3.x**  
+- **Spring Data JPA (Hibernate)**  
+- **Spring Security** (BCrypt, UserDetailsService)  
+- **Maven**  
+- **PostgreSQL**  
+- **Jakarta Bean Validation**  
+- **Lombok**  
+- **Swagger** (para documentación API)  
 
-Lombok
+---
 
-Swagger 
+## 🛠️ Requisitos previos
 
+Antes de comenzar, asegúrate de tener instalado y configurado lo siguiente:
 
-Requisitos previos
-Java 17 instalado
+- Java 17  
+- Maven  
+- PostgreSQL en ejecución y configurado  
+- IDE recomendado: IntelliJ IDEA o Eclipse  
 
-Maven instalado
+---
 
-PostgreSQL configurado y corriendo
+## ⚙️ Configuración y despliegue
 
-IDE recomendado: IntelliJ IDEA / Eclipse
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/tu_usuario/KaikanMarcosWeb.git
+   cd KaikanMarcosWeb
+
