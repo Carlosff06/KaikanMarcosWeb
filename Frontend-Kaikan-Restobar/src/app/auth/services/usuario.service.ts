@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { constants } from '../../core/constants/constants';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -8,7 +9,14 @@ import { constants } from '../../core/constants/constants';
 })
 export class UsuarioService {
 
-  constructor(private readonly  http:HttpClient) { }
+  constructor(private readonly  http:HttpClient) {
+    const rol = sessionStorage.getItem(constants.CURRENT_USER_ROLE);
+  if (rol) {
+    this.rolSubject.next(rol);
+  }
+  }
+
+  private rolSubject = new BehaviorSubject<string | null>(null);
 
   getUsuarioId(){
     return sessionStorage.getItem(constants.CURRENT_USERID) ?? null;
@@ -26,11 +34,13 @@ export class UsuarioService {
 
   setRol(rol:string){
     sessionStorage.setItem(constants.CURRENT_USER_ROLE, rol)
+    this.rolSubject.next(rol);
   }
 
-  getRol(){
-    return sessionStorage.getItem(constants.CURRENT_USER_ROLE) ?? null;
+ getRol$() {
 
+    return this.rolSubject.asObservable();
+    
   }
 
   getUsuario(): string | null {

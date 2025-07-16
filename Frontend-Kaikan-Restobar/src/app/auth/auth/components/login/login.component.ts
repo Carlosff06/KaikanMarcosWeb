@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
@@ -15,14 +15,14 @@ import { UsuarioService } from '../../../services/usuario.service';
 export class LoginComponent {
 
   loginForm:FormGroup;
-
+   @Output() datosEmitidos = new EventEmitter<boolean>();
 
   constructor(private formBuilder:FormBuilder, private router:Router,
     private authService:AuthService, private usuarioService:UsuarioService
   ){
     this.loginForm = this.formBuilder.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      contrasenia: new FormControl('', [Validators.required])
+      email: new FormControl('carlos@gmail.com', [Validators.required, Validators.email]),
+      contrasenia: new FormControl('1234', [Validators.required])
     });
   }
 
@@ -33,7 +33,7 @@ export class LoginComponent {
       this.authService.onLogin(this.loginForm.value).subscribe({
         next: (value) => {
 
-        this.router.navigate(['./home'])
+        this.enviarDatos(true)
         }, error: (err) => {
           alert('Usuario Incorrecto')
         }
@@ -43,5 +43,14 @@ export class LoginComponent {
     ////console.log('invalidado')
     this.loginForm.markAllAsTouched();
   }
+  }
+
+  enviarDatos(logueado:boolean) {
+
+    this.datosEmitidos.emit(logueado);
+  }
+
+  registrarse(){
+
   }
 }

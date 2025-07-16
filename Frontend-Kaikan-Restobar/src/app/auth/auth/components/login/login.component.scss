@@ -1,13 +1,14 @@
 .body{
   width: 100vw;
   height: 100vh;
-  background: white;
-  background-image: radial-gradient(#d0d0d0, 1px, transparent 1px);
-  background-size: 20px 20px;
+  background: none;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: fixed;
+  z-index: 1000;
+
 }
 .img-gestum{
   position: absolute;

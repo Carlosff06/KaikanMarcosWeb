@@ -1,0 +1,80 @@
+<app-navegacion [isLoguedIn]="true"></app-navegacion>
+
+<h1 class="mt-4 mb-3 text-center text-md-start">Pedidos</h1>
+
+<div class="container">
+
+  <!-- Tabla visible en md+ -->
+  <div class="table-responsive d-none d-md-block">
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Cliente</th>
+          <th>Estado</th>
+          <th>Fecha</th>
+          <th>Plato</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (pedido of pedidos; track $index) {
+          @for (detalle of pedido.detallesPedido; track $index) {
+            <tr>
+              <td>{{ pedido.usuario.email }}</td>
+              <td>
+                <span *ngIf="usuario.rol !== 'ADMIN'">{{ pedido.estado }}</span>
+                @if (usuario.rol === 'ADMIN') {
+                  <select class="form-select form-select-sm w-100"
+                          (change)="actualizarPedido(pedido)"
+                          [(ngModel)]="pedido.estado">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Preparando">Preparando</option>
+                    <option value="Finalizado">Finalizado</option>
+                    <option value="Enviado">Enviado</option>
+                    <option value="Cancelado">Cancelado</option>
+                  </select>
+                }
+              </td>
+              <td>{{ pedido.fecha_pedido }}</td>
+              <td>{{ detalle.plato.nombre }}</td>
+              <td>{{ detalle.cantidad }}</td>
+              <td>{{ detalle.cantidad * detalle.plato.precio | currency }}</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tarjetas visibles en xs-sm -->
+  <div class="d-block d-md-none">
+    <div *ngFor="let pedido of pedidos">
+      <div *ngFor="let detalle of pedido.detallesPedido" class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ pedido.usuario.email }}</h5>
+          <p class="card-text">
+            <strong>Estado:</strong>
+            <span *ngIf="usuario.rol !== 'ADMIN'">{{ pedido.estado }}</span>
+            <ng-container *ngIf="usuario.rol === 'ADMIN'">
+              <select class="form-select form-select-sm w-100"
+                      (change)="actualizarPedido(pedido)"
+                      [(ngModel)]="pedido.estado">
+                <option value="Pendiente">Pendiente</option>
+                <option value="Preparando">Preparando</option>
+                <option value="Finalizado">Finalizado</option>
+                <option value="Enviado">Enviado</option>
+                <option value="Cancelado">Cancelado</option>
+              </select>
+            </ng-container>
+          </p>
+          <p class="card-text"><strong>Fecha:</strong> {{ pedido.fecha_pedido }}</p>
+          <p class="card-text"><strong>Plato:</strong> {{ detalle.plato.nombre }}</p>
+          <p class="card-text"><strong>Cantidad:</strong> {{ detalle.cantidad }}</p>
+          <p class="card-text"><strong>Total:</strong> {{ detalle.cantidad * detalle.plato.precio | currency }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

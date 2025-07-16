@@ -28,11 +28,19 @@
   cursor: pointer;
   margin-bottom: 0px !important;
 }
+.card-body-add{
+  background-color: white !important;
+}
 
 .card-body:hover {
   transform: scale(1.02);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
 }
+.card-body-add.card-body:hover {
+  transform: none !important;
+  
+}
+
 
 .currency-container{
   display: flex;

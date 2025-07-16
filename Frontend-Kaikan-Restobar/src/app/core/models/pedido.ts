@@ -1,3 +1,4 @@
+import { DetallePedido } from "./detallepedido";
 import { Usuario } from "./usuario";
 
 export class Pedido{
@@ -6,6 +7,8 @@ export class Pedido{
   fecha_pago:string;
   fecha_pedido:string;
   usuario:Usuario;
+  detallesPedido:DetallePedido[]=[];
+
 
   constructor(id:number|null,estado:string,fecha_pago:string,
     fecha_pedido:string,usuario:Usuario

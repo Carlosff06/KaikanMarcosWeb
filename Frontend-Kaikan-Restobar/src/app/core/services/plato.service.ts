@@ -19,4 +19,13 @@ export class PlatoService {
   buscarPlatosPorCategoria(categoria: string): Observable<Plato[]>{
     return this.http.get<Plato[]>(`${this.apiUrl}/${categoria}`);
   }
+
+  guardarPlato(plato: Plato): Observable<Plato> {
+    return this.http.post<Plato>(this.apiUrl, plato);
+  }
+
+  eliminarPlato(id:number):Observable<void>{
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 }

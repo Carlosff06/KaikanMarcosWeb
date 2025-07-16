@@ -1,4 +1,7 @@
-<app-navegacion></app-navegacion>
+ @if (mostrarLogin) {
+ <app-login  (datosEmitidos)="recibirLogin($event)"></app-login>
+}
+ <app-navegacion [isLoguedIn]="isLoguedIn" (datosEmitidos)="recibirDatosNavegacion($event)"></app-navegacion>
 
 <!-- Sección principal -->
 <div class="container-fluid bg-light p-5 rounded-4 mt-4">
@@ -66,6 +69,9 @@
 
   </div>
 
-  <app-menu id="menu" [categoria] = "categoria" ></app-menu>
-  <app-carrito-detalle></app-carrito-detalle>
+  <app-menu  id="menu" (datosEmitidos)="recibirDatos($event)" [categoria] = "categoria" ></app-menu>
+  @if (isLoguedIn) {
+  <app-carrito-detalle  *ngIf="usuario.rol!=='ADMIN'"></app-carrito-detalle>
+  }
+
 

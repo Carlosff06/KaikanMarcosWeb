@@ -7,9 +7,45 @@
   </div>
 
   <div class="row">
+
     @for (plato of platos; track $index) {
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4">
-      <div class="card h-100">
+      <div class="card h-100" *ngIf="platoEditando === plato.id">
+      <form [formGroup]="platoEditar" >
+
+  <input type="text" formControlName="nombre" placeholder="Nombre del Plato"
+         class="form-control"
+         [ngClass]="{ 'is-invalid': platoEditar.get('nombre')?.invalid && platoEditar.get('nombre')?.touched, 'is-valid': platoEditar.get('nombre')?.valid && platoEditar.get('nombre')?.touched }" />
+
+  <input type="text" formControlName="img_url" placeholder="URL de la Imagen"
+         class="form-control"
+         [ngClass]="{ 'is-invalid': platoEditar.get('img_url')?.invalid && platoEditar.get('img_url')?.touched, 'is-valid': platoEditar.get('img_url')?.valid && platoEditar.get('img_url')?.touched }" />
+
+  <textarea formControlName="descripcion" placeholder="Descripción"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': platoEditar.get('descripcion')?.invalid && platoEditar.get('descripcion')?.touched, 'is-valid': platoEditar.get('descripcion')?.valid && platoEditar.get('descripcion')?.touched }"></textarea>
+
+  <select formControlName="categoria_id" class="form-select"
+          [ngClass]="{ 'is-invalid': platoEditar.get('categoria_id')?.invalid && platoEditar.get('categoria_id')?.touched, 'is-valid': platoEditar.get('categoria_id')?.valid && platoEditar.get('categoria_id')?.touched }">
+    @for (categoria of categorias; track $index) {
+      <option [value]="categoria.id">{{categoria.nombre}}</option>
+    }
+  </select>
+
+  <input type="number" formControlName="precio" placeholder="Precio del Plato"
+         class="form-control"
+         [ngClass]="{ 'is-invalid': platoEditar.get('precio')?.invalid && platoEditar.get('precio')?.touched, 'is-valid': platoEditar.get('precio')?.valid && platoEditar.get('precio')?.touched }" />
+
+  <button class="btn btn-success" type="submit" [disabled]="platoEditar.invalid" (click)="actualizarPlato()">
+    Actualizar Plato
+  </button>
+  <button class="btn btn-danger" type="submit"  (click)="cancelarEdicion()">
+    Cancelar
+  </button>
+</form>
+</div>
+      <div class="card h-100"  *ngIf="platoEditando !== plato.id">
+
         <img *ngIf="platoSeleccionado!=plato.nombre"  [src]="plato.img_url" class="card-img-top" alt="..." (click)="mostrarDescripcion(plato)" (mouseenter)="mostrarDescripcion(plato)"
   >
         <div *ngIf="platoSeleccionado===plato.nombre" (click)="ocultarDescripcion()" (mouseleave)="ocultarDescripcion()" class="card-body">
@@ -17,13 +53,56 @@
           <p class="text">{{plato.descripcion}}</p>
 
            <div class="currency-container"> <p class="text">{{plato.precio | currency}}</p>
-          <button class="btn btn-danger" (click)="agregarAlCarrito(plato)">Agregar al Carrito</button>
+          <button *ngIf="usuario.rol!=='ADMIN'" class="btn btn-danger" (click)="agregarAlCarrito(plato)">Agregar al Carrito</button>
+          <button *ngIf="usuario.rol==='ADMIN'" class="btn btn-primary" (click)="activarEdicion(plato)">EditarPlato</button>
+          <button *ngIf="usuario.rol==='ADMIN'" class="btn btn-danger" (click)="eliminarPlato(plato.id)">Eliminar Plato</button>
         </div>
         </div>
 
       </div>
     </div>
+
     }
+    <div *ngIf="usuario.rol==='ADMIN'" class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4">
+      <div class="card h-100">
+
+        <div   class="card-body card-body-add">
+          <form [formGroup]="platoAgregar" >
+
+  <input type="text" formControlName="nombre" placeholder="Nombre del Plato"
+         class="form-control"
+         [ngClass]="{ 'is-invalid': platoAgregar.get('nombre')?.invalid && platoAgregar.get('nombre')?.touched, 'is-valid': platoAgregar.get('nombre')?.valid && platoAgregar.get('nombre')?.touched }" />
+
+  <input type="text" formControlName="img_url" placeholder="URL de la Imagen"
+         class="form-control"
+         [ngClass]="{ 'is-invalid': platoAgregar.get('img_url')?.invalid && platoAgregar.get('img_url')?.touched, 'is-valid': platoAgregar.get('img_url')?.valid && platoAgregar.get('img_url')?.touched }" />
+
+  <textarea formControlName="descripcion" placeholder="Descripción"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': platoAgregar.get('descripcion')?.invalid && platoAgregar.get('descripcion')?.touched, 'is-valid': platoAgregar.get('descripcion')?.valid && platoAgregar.get('descripcion')?.touched }"></textarea>
+
+  <select formControlName="categoria_id" class="form-select"
+          [ngClass]="{ 'is-invalid': platoAgregar.get('categoria_id')?.invalid && platoAgregar.get('categoria_id')?.touched, 'is-valid': platoAgregar.get('categoria_id')?.valid && platoAgregar.get('categoria_id')?.touched }">
+    @for (categoria of categorias; track $index) {
+      <option [value]="categoria.id">{{categoria.nombre}}</option>
+    }
+  </select>
+
+  <input type="number" formControlName="precio" placeholder="Precio del Plato"
+         class="form-control"
+         [ngClass]="{ 'is-invalid': platoAgregar.get('precio')?.invalid && platoAgregar.get('precio')?.touched, 'is-valid': platoAgregar.get('precio')?.valid && platoAgregar.get('precio')?.touched }" />
+
+  <button class="btn btn-success" type="submit" [disabled]="platoAgregar.invalid" (click)="agregarPlato()">
+    Agregar Plato
+  </button>
+
+
+</form>
+
+        </div>
+
+      </div>
+    </div>
   </div>
 
 </div>

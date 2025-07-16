@@ -21,6 +21,7 @@ public class GenericController <T extends BaseEntity, Long> {
 
     @PostMapping
     public T crear(@RequestBody T t){
+        System.out.println(t);
         genericService.guardar(t);
         return t;
     }
