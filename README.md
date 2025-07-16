@@ -9,7 +9,7 @@ Ofrece funcionalidades para administrar:
 
 - Clientes (usuarios)  
 - Productos (platos)  
-- Ventas con control de stock  
+- Gestion de Pedidos
 - Autenticación y autorización basada en roles  
 - Seguridad reforzada con hashing de contraseñas y protección CSRF  
 
