@@ -16,7 +16,8 @@ Ofrece funcionalidades para administrar:
 ---
 
 ## 🚀 Tecnologías utilizadas
-
+- **Angular 19**
+-  **TypeScript**  
 - **Java 17**  
 - **Spring Boot 3.x**  
 - **Spring Data JPA (Hibernate)**  
