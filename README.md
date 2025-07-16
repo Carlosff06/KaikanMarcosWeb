@@ -48,5 +48,6 @@ Antes de comenzar, asegúrate de tener instalado y configurado lo siguiente:
    git clone https://github.com/tu_usuario/KaikanMarcosWeb.git
    cd KaikanMarcosWeb
 2. Levantar proyecto con angular
+   ```bash
    ng serve -o
 
